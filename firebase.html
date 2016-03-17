@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+	<link rel='stylesheet' type='text/css' href='/resources/tutorial/css/example.css'>
+  </head>
+  <body>
+    <div id='messagesDiv'></div>
+    <input type='text' id='nameInput' placeholder='Name'>
+    <input type='text' id='orgInput' placeholder='Organization'>
+    <input type='text' id='contactInput' placeholder='+639XXXXXXXXX'>
+    <script>
+      var myDataRef = new Firebase('https://guest-attendance.firebaseio.com/');
+      $('#contactInput').keypress(function (e) {
+        if (e.keyCode == 13) {
+          var name = $('#nameInput').val();
+          var organization = $('#orgInput').val();
+	  var contactNumber = $('#contactInput').val();
+          myDataRef.push({contactNumber: contactNumber, name: name, organization: organization});
+          $('#nameInput').val('');
+	  $('#orgInput').val('');
+	  $('#contactInput').val('');
+        }
+      });
+      myDataRef.on('child_added', function(snapshot) {
+        var guest = snapshot.val();
+        displayChatMessage(guest.name, guest.organization, guest.contactNumber);
+      });
+      function displayChatMessage(name, organization, contactNumber) {
+        $('<div/>').text(contactNumber).prepend($('<em/>').text(organization+': ')).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+        $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+      };
+    </script>
+  </body>
+</html>
