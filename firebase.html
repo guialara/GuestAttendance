@@ -1,18 +1,99 @@
 <!doctype html>
 <html>
   <head>
-	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-	<link rel='stylesheet' type='text/css' href='/resources/tutorial/css/example.css'>
+	<title>Event Guest Attendance</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.5 -->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<!-- DataTables -->
+	<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+	<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
   </head>
-  <body>
-    <div id='messagesDiv'></div>
-    <input type='text' id='nameInput' placeholder='Name'>
-    <input type='text' id='orgInput' placeholder='Organization'>
-    <input type='text' id='contactInput' placeholder='+639XXXXXXXXX'>
-    <script>
+  <body class="hold-transition skin-blue sidebar-mini">
+	 <div class="wrapper">
+
+	<header class="main-header">
+        <!-- Logo -->
+        <a class="logo">
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>Guest</b>Attendance</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+            </ul>
+          </div>
+        </nav>
+      </header>
+         <section class="content">
+		<div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Guest Attendance</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" id="form">
+                  <div class="box-body">
+                    <div class="form-group">
+                     <label >Name</label>
+                      <input type="text" class="form-control" id="nameInput" placeholder="Enter Name">
+                      <label>Organization</label>
+                      <input type="text" class="form-control" id="orgInput" placeholder="Enter Organization">
+		      <label >Contact Number</label>
+                      <input type="text" class="form-control" id="contactInput" placeholder="Contact Number">
+                    </div>
+			<div>
+		      		<label>*Press 'Enter' to submit your attendance.</label>
+			</div>
+                  </div><!-- /.box-body -->
+                </form>
+              </div><!-- /.box -->
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Attending Guests</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Organization</th>
+                        <th>Contact Number</th>
+                      </tr>
+                    </thead>
+                    <tbody id="guests">
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>Name</th>
+                        <th>Organization</th>
+                        <th>Contact Number</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section>
+</div>
+	<script>
+	var guestCount = 0;
       var myDataRef = new Firebase('https://guest-attendance.firebaseio.com/');
-      $('#contactInput').keypress(function (e) {
+      $('#form').keypress(function (e) {
         if (e.keyCode == 13) {
           var name = $('#nameInput').val();
           var organization = $('#orgInput').val();
@@ -23,14 +104,26 @@
 	  $('#contactInput').val('');
         }
       });
+	var guestName = new Array();
+	var guestOrg = new Array();
+	var guestContactNum = new Array();
       myDataRef.on('child_added', function(snapshot) {
         var guest = snapshot.val();
-        displayChatMessage(guest.name, guest.organization, guest.contactNumber);
+	displayGuestInfo(guest.name, guest.organization, guest.contactNumber);
       });
-      function displayChatMessage(name, organization, contactNumber) {
-        $('<div/>').text(contactNumber).prepend($('<em/>').text(organization+': ')).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
-        $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+      function displayGuestInfo(name, organization, contactNumber){
+	$('#guests').prepend('<tr><td>'+name+'</td><td>'+organization+'</td><td>'+contactNumber+'</td></tr>');
       };
-    </script>
+    	</script>
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="dist/js/demo.js"></script>
+    <!-- page script -->
+    </script> 	
   </body>
 </html>
