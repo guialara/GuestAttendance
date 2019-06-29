@@ -113,12 +113,17 @@
 
     $('#form').keypress(function (e) {
       if (e.keyCode == 13) {
-        
+        if()
         var name = $('#nameInput').val();
         var organization = $('#orgInput').val();
         var contactNumber = $('#contactInput').val();
         
+        if(name && organization && contactNumber){
         myDataRef.push({contactNumber: contactNumber, name: name, organization: organization});
+        }
+        else{
+          alert("Please don't leave any blanks on the form!");
+        }
         
         $('#nameInput').val('');
     	  $('#orgInput').val('');
