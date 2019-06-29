@@ -4,7 +4,8 @@
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 	<title>Event Guest Attendance</title>
 	<!-- Tell the browser to be responsive to screen width -->
-	<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -121,7 +122,7 @@
     	  $('#contactInput').val('');
       }
     });
-    
+
   	var guestName = new Array();
   	var guestOrg = new Array();
   	var guestContactNum = new Array();
