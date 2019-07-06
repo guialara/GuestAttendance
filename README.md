@@ -8,6 +8,7 @@ Event Guest Attendance
 * Currently in continuation for improvments.
 
 ### TO DO:
+* Update form validation (50% complete)
 * Correct the dekstop view.
 * Update mobile view.
 * Add full admin view to check statistics of guests attended per each event.
