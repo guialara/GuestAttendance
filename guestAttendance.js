@@ -12,7 +12,7 @@
     firebase.initializeApp(firebaseConfig);
 
   	var guestCount = 0;
-    var myDataRef = firebase.database().ref('messages');
+    var myDataRef = firebase.database().ref('guests');
   	var guestName = new Array();
   	var guestOrg = new Array();
   	var guestContactNum = new Array();
