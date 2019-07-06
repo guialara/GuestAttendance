@@ -16,7 +16,7 @@
   	var guestName = new Array();
   	var guestOrg = new Array();
   	var guestContactNum = new Array();
-    var nameNOrgPtrn = new RegExp('^[a-zA-Z0-9]+$');
+    var nameNOrgPtrn = new RegExp('^[a-zA-Z0-9 ]+$');
     var numPtrn = new RegExp('^(\\+?[0-9]{2,3})?[0-9]{10}$');
     
     myDataRef.on('child_added', function(snapshot) {
