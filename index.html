@@ -45,22 +45,20 @@
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <!--To do: to improve validation and add submit button-->
-                <form role="form" id="form">
+                <form role="form" id="form" name="guestForm" action="#">
                   <div class="box-body">
                     <div class="form-group">
                      <label >Name</label>
-                      <input type="text" class="form-control" id="nameInput" placeholder="Enter Name"
-                      required>
-                      <label>Organization</label>
-                      <input type="text" class="form-control" id="orgInput" placeholder="Enter Organization"
-                      required>
-		      <label >Contact Number</label>
-                      <input type="Number" class="form-control" id="contactInput" placeholder="Contact Number"
-                      required>
+						<input type="text" class="form-control" id="nameInput" placeholder="Enter Name">
+						<label>Organization</label>
+						<input type="text" class="form-control" id="orgInput" placeholder="Enter Organization">
+						<label>PH Mobile Number</label>
+						<input type="text" class="form-control" id="contactInput" placeholder="+123456789012 OR 1234567890">
+						<span>Mobile phone format accepted: 9170000000, +630000000000, 630000000000</span>
                     </div>
-			<div>
-		      		<label>*Press 'Enter' to submit your attendance.</label>
-			</div>
+					<div>
+						<input type="submit" name="submit" value="Submit!" onclick="submitFormAttendance()" class="btn btn-info">
+					</div>
                   </div><!-- /.box-body -->
                 </form>
               </div><!-- /.box -->
